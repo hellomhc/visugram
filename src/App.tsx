@@ -1,23 +1,33 @@
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {registerRootComponent} from 'expo';
 import React from 'react';
 import {Text} from 'react-native';
-import styled from 'styled-components/native';
-import {View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import HomeScreen from 'screens/HomeScreen';
+import SortScreen from 'screens/SortScreen';
 
-const StyledView = styled.View`
-  background-color: blue;
-`;
+const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   return (
-    <StyledView>
-      <View>
-        <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-        <View style={{width: 100, height: 100, backgroundColor: 'skyblue'}} />
-        <View style={{width: 150, height: 150, backgroundColor: 'steelblue'}} />
-      </View>
-      <Text>React Native</Text>
-    </StyledView>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen
+            name='Home'
+            component={HomeScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name='Sort'
+            component={SortScreen}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
